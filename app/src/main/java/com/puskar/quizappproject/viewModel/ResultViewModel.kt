@@ -12,26 +12,26 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AnswerViewModel @Inject constructor(
+class ResultViewModel @Inject constructor(
     private val repository: QuizRepositoryImpl
 ) : ViewModel(){
 
-    private val _data: MutableLiveData<List<Quiz>> = MutableLiveData()
-    val data: LiveData<List<Quiz>> = _data
+    private val _resultData: MutableLiveData<List<Quiz>> = MutableLiveData()
+    val data: LiveData<List<Quiz>> = _resultData
 
     init {
-        loadData()
+        fetchData()
     }
 
-    private fun loadData() {
+    private fun fetchData() {
         viewModelScope.launch(Dispatchers.IO) {
-            _data.postValue(repository.getQuizList())
+            _resultData.postValue(repository.getQuestionList())
         }
     }
 
-    fun resetDatabase(newList: MutableList<Quiz>) {
+    fun resetDB(newList: MutableList<Quiz>) {
         viewModelScope.launch(Dispatchers.IO) {
-            _data.postValue(newList)
+            _resultData.postValue(newList)
         }
     }
 }

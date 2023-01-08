@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puskar.quizappproject.R
 import com.puskar.quizappproject.data.Quiz
 import com.puskar.quizappproject.databinding.FragmentRadioButtonQuestionBinding
-import com.puskar.quizappproject.viewModel.QuizViewModel
+import com.puskar.quizappproject.viewModel.QueryViewModel
 import com.puskar.quizappproject.util.RadioClickInterface
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RadioButtonQuestionFragment : Fragment(R.layout.fragment_radio_button_question), RadioClickInterface {
     private lateinit var quiz: Quiz
-    private lateinit var viewModel: QuizViewModel
+    private lateinit var viewModel: QueryViewModel
     private lateinit var binding: FragmentRadioButtonQuestionBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class RadioButtonQuestionFragment : Fragment(R.layout.fragment_radio_button_ques
 
     private fun initSetup(view: View) {
         binding = FragmentRadioButtonQuestionBinding.bind(view)
-        viewModel = ViewModelProvider(requireActivity())[QuizViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[QueryViewModel::class.java]
 
         binding.questionTextView.text = quiz.question
 
@@ -35,8 +35,8 @@ class RadioButtonQuestionFragment : Fragment(R.layout.fragment_radio_button_ques
         binding.optionsRecyclerView.adapter = adapter
     }
 
-    override fun onRadioButtonClicked(optionPosition: Int, userAnswerDesc: String) {
-        quiz.userAnswer = when(optionPosition) {
+    override fun onRadioButtonClicked(optionPos: Int, userAnswerDesc: String) {
+        quiz.userAnswer = when(optionPos) {
             0 -> "a"
             1 -> "b"
             2 -> "c"
@@ -44,7 +44,7 @@ class RadioButtonQuestionFragment : Fragment(R.layout.fragment_radio_button_ques
             else -> ""
         }
         quiz.userAnswerDesc = userAnswerDesc
-        viewModel.saveUserAnswer(quiz)
+        viewModel.saveUserResult(quiz)
     }
 
     private fun getArgumentsData() {

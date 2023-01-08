@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class QuizViewModel @Inject constructor(
+class QueryViewModel @Inject constructor(
     private val repository: QuizRepository
 ) : ViewModel(){
 
@@ -20,22 +20,22 @@ class QuizViewModel @Inject constructor(
     val data: LiveData<List<Quiz>> = _data
 
     init {
-        loadData()
+        fetchData()
     }
 
-    private fun loadData() {
+    private fun fetchData() {
         viewModelScope.launch(Dispatchers.IO) {
-            _data.postValue(repository.getQuizList())
+            _data.postValue(repository.getQuestionList())
         }
     }
 
-    fun resetDatabase(newList: MutableList<Quiz>) {
+    fun resetDB(newList: MutableList<Quiz>) {
         viewModelScope.launch(Dispatchers.IO) {
             _data.postValue(newList)
         }
     }
 
-    fun saveUserAnswer(quiz: Quiz) {
+    fun saveUserResult(quiz: Quiz) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertQuiz(quiz)
         }

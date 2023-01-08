@@ -5,14 +5,14 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.puskar.quizappproject.R
 import com.puskar.quizappproject.databinding.ActivityResultAnalysisBinding
-import com.puskar.quizappproject.viewModel.QuizViewModel
+import com.puskar.quizappproject.viewModel.QueryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ResultAnalysisActivity : AppCompatActivity(R.layout.activity_result_analysis) {
 
     private lateinit var binding : ActivityResultAnalysisBinding
-    private val viewModel: QuizViewModel by viewModels()
+    private val viewModel: QueryViewModel by viewModels()
     private lateinit var adapter: ResultAnalysisAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class ResultAnalysisActivity : AppCompatActivity(R.layout.activity_result_analys
 
         initRecyclerView()
 
-        loadData()
+        fetchData()
     }
 
     private fun initRecyclerView() {
@@ -30,7 +30,7 @@ class ResultAnalysisActivity : AppCompatActivity(R.layout.activity_result_analys
         binding.resultAnalysisRecyclerView.adapter = adapter
     }
 
-    private fun loadData() {
+    private fun fetchData() {
         viewModel.data.observe(this){quizList ->
             quizList?.let {
                 adapter.updateList(it)

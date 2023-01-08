@@ -15,7 +15,7 @@ interface QuizDAO {
     suspend fun insertQuiz(quiz: Quiz)
 
     @Query("SELECT * FROM quiz")
-    suspend fun getQuizList(): MutableList<Quiz>
+    suspend fun getQuestionList(): MutableList<Quiz>
 
     @Query("SELECT * FROM quiz WHERE id= :id")
     suspend fun getQuiz(id: Int): Quiz

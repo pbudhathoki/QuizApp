@@ -35,8 +35,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="171dp"
-        android:background="@color/teal_700"
-        android:backgroundTint="@color/teal_700"
+        android:background="@color/purple_700"
+        android:backgroundTint="@color/purple_700"
+        android:textColor="@color/white"
         android:text="START QUIZ" />
 
 </RelativeLayout>

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puskar.quizappproject.R
 import com.puskar.quizappproject.data.QuizData
 import com.puskar.quizappproject.databinding.FragmentResultBinding
-import com.puskar.quizappproject.viewModel.AnswerViewModel
+import com.puskar.quizappproject.viewModel.ResultViewModel
 import com.puskar.quizappproject.ui.SplashActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +19,7 @@ class ResultFragment : Fragment(R.layout.fragment_result), OnClickListener {
 
     private var sizeOfData: Int = 0
     private lateinit var binding: FragmentResultBinding
-    private lateinit var viewModel: AnswerViewModel
+    private lateinit var viewModel: ResultViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,7 +51,7 @@ class ResultFragment : Fragment(R.layout.fragment_result), OnClickListener {
 
     private fun initialSetup(view: View) {
         binding = FragmentResultBinding.bind(view)
-        viewModel = ViewModelProvider(requireActivity())[AnswerViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[ResultViewModel::class.java]
 
         binding.tryAgainButton.setOnClickListener(this)
         binding.resultAnalysisButton.setOnClickListener(this)
@@ -78,6 +78,6 @@ class ResultFragment : Fragment(R.layout.fragment_result), OnClickListener {
     }
 
     private fun resetDB() {
-        viewModel.resetDatabase(QuizData.getAppQuestions())
+        viewModel.resetDB(QuizData.getAppQuestions())
     }
 }

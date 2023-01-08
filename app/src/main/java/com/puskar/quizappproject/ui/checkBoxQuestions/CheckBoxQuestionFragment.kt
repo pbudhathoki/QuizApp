@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puskar.quizappproject.R
 import com.puskar.quizappproject.data.Quiz
 import com.puskar.quizappproject.databinding.FragmentCheckBoxQuestionBinding
-import com.puskar.quizappproject.viewModel.QuizViewModel
+import com.puskar.quizappproject.viewModel.QueryViewModel
 import com.puskar.quizappproject.util.CheckClickInterface
 import com.google.gson.Gson
 import com.puskar.quizappproject.data.AnswerModel
@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question), CheckClickInterface {
 
     private lateinit var quiz: Quiz
-    private lateinit var viewModel: QuizViewModel
+    private lateinit var viewModel: QueryViewModel
     private lateinit var binding: FragmentCheckBoxQuestionBinding
     private var checkedOptions: ArrayList<AnswerModel> = arrayListOf()
 
@@ -37,7 +37,7 @@ class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question),
 
     private fun initSetup(view: View) {
         binding = FragmentCheckBoxQuestionBinding.bind(view)
-        viewModel = ViewModelProvider(requireActivity())[QuizViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[QueryViewModel::class.java]
 
         binding.questionTextView.text = quiz.question
 
@@ -73,7 +73,7 @@ class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question),
         //update the answer parameter of quiz object
         quiz.userAnswer = answer
         quiz.userAnswerDesc = answerDesc
-        viewModel.saveUserAnswer(quiz)
+        viewModel.saveUserResult(quiz)
         Log.v("CheckBoxQuestionFragment", "inserted data : $quiz")
     }
 

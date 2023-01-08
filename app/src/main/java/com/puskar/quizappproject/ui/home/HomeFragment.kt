@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puskar.quizappproject.R
 import com.puskar.quizappproject.data.QuizData
 import com.puskar.quizappproject.databinding.FragmentHomeBinding
-import com.puskar.quizappproject.viewModel.QuizViewModel
+import com.puskar.quizappproject.viewModel.QueryViewModel
 import com.puskar.quizappproject.ui.SplashActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnClickListener{
     private lateinit var _context: Context
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: QuizViewModel
+    private lateinit var viewModel: QueryViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -30,7 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
-        viewModel = ViewModelProvider(requireActivity())[QuizViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[QueryViewModel::class.java]
 
         initialSetup()
 
@@ -71,7 +71,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnClickListener{
     }
 
     private fun resetDB() {
-        viewModel.resetDatabase(QuizData.getAppQuestions())
+        viewModel.resetDB(QuizData.getAppQuestions())
     }
 
 }

@@ -19,11 +19,11 @@ class QuizRepositoryImpl @Inject constructor(
         quizDao.insertQuiz(quiz)
     }
 
-    override suspend fun getQuizList(): MutableList<Quiz> {
-        return quizDao.getQuizList()
+    override suspend fun getQuestionList(): MutableList<Quiz> {
+        return quizDao.getQuestionList()
     }
 
-    override suspend fun resetQuestionSet() {
+    override suspend fun resetQuizQuestionSet() {
         db.clearAllTables()
     }
 
